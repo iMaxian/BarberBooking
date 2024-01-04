@@ -15,7 +15,7 @@ namespace BarberBooking.Models
         [StringLength(30, MinimumLength = 3)]
         public string Prenume { get; set; }
 
-        [Display(Name = "Nume complet")]
+        [Display(Name = "Nume Barber")]
         public string NumeComplet
         {
             get

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/"
 @model BarberBooking.Pages.Servicii.IndexModel
 
 @{
@@ -19,36 +19,53 @@
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].Cost)
             </th>
-            @*
-            <th> //Daca doresc sa afisez pe pagina principala data programarii, decomentez
+            @* - afisarea datei //Daca doresc sa afisez pe pagina principala data programarii, decomentez*@
+            <th> 
                 @Html.DisplayNameFor(model => model.Serviciu[0].Data_Programare)
             </th>
-            *@
-
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].Barber.NumeComplet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Serviciu[0].ServiciuStiluri)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Serviciu) {
-        <tr>
+@foreach (var item in Model.ServiciuD.Servicii) {
+    string selectedRow = "";
+        if (item.ID == Model.ServiciuID)
+        {
+            selectedRow = "table-success";
+        }
+
+        <tr class="@selectedRow">
             <td>
                 @Html.DisplayFor(modelItem => item.Tip_Serviciu)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
-            @* //Daca doresc sa afisez pe pagina principala data programarii, decomentez
+            @* //Daca doresc sa afisez pe pagina principala data programarii, decomentez *@
             <td>
                @Html.DisplayFor(modelItem => item.Data_Programare)
             </td>
-            *@
+            
 
+             <td>
+                @Html.DisplayFor(modelItem => item.Barber.NumeComplet)
+             </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Barber.NumeComplet)
+                    @{
+                        foreach (var category in item.ServiciuStiluri)
+                        {
+                            @category.Stil.ID @: @category.Stil.DenumireStil <br />
+                        }
+                    }
                 </td>
+
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |

@@ -17,5 +17,7 @@ namespace BarberBooking.Data
         public DbSet<BarberBooking.Models.Serviciu> Serviciu { get; set; } = default!;
 
         public DbSet<BarberBooking.Models.Barber>? Barber { get; set; }
+
+        public DbSet<BarberBooking.Models.Stil>? Stil { get; set; }
     }
 }

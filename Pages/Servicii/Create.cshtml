@@ -32,6 +32,38 @@
                 <label asp-for="Serviciu.BarberID" class="control-label"></label>
                 <select asp-for="Serviciu.BarberID" class="form-control" asp-items="ViewBag.BarberID"></select>
             </div>
+
+             <div class="form-group">
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <p> 
+                                <p>Alegeti Stilul  dorit :</p>
+                                @{
+                                    int cnt = 0;
+                                    foreach (var cat in Model.StilAtribuitServiciuList)
+                                    {
+                                        if (cnt++ % 3 == 0)
+                                        {
+                                            @:</tr><tr>
+                                        }
+                                        @:<td>
+                                        //Alegere de tip Radio a unui singur Stil (un serviciu apartine doar de un Stil)
+                                            <input type="radio"
+                                                name="selectedStiluri"
+                                                value="@cat.StilID"
+                                                @(Html.Raw(cat.Atribuire ?
+                                                "checked=\"checked\"" : "")) />
+                                                @cat.StilID @: @cat.Denumire
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                                }
+                     </table>
+                 </div>
+            </div>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

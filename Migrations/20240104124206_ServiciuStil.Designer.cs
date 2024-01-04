@@ -4,6 +4,7 @@ using BarberBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberBooking.Migrations
 {
     [DbContext(typeof(BarberBookingContext))]
-    partial class BarberBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20240104124206_ServiciuStil")]
+    partial class ServiciuStil
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,34 +50,6 @@ namespace BarberBooking.Migrations
                     b.ToTable("Barber");
                 });
 
-            modelBuilder.Entity("BarberBooking.Models.BarberShop", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NrTelefon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rateing")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("BarberShop");
-                });
-
             modelBuilder.Entity("BarberBooking.Models.Serviciu", b =>
                 {
                     b.Property<int>("ID")
@@ -85,9 +59,6 @@ namespace BarberBooking.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<int?>("BarberID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BarberShopID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Cost")
@@ -103,8 +74,6 @@ namespace BarberBooking.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("BarberID");
-
-                    b.HasIndex("BarberShopID");
 
                     b.ToTable("Serviciu");
                 });
@@ -155,13 +124,7 @@ namespace BarberBooking.Migrations
                         .WithMany("Servicii")
                         .HasForeignKey("BarberID");
 
-                    b.HasOne("BarberBooking.Models.BarberShop", "BarberShop")
-                        .WithMany()
-                        .HasForeignKey("BarberShopID");
-
                     b.Navigation("Barber");
-
-                    b.Navigation("BarberShop");
                 });
 
             modelBuilder.Entity("BarberBooking.Models.ServiciuStil", b =>

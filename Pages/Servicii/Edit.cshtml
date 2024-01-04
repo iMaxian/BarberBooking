@@ -24,13 +24,41 @@
                 <input asp-for="Serviciu.Cost" class="form-control" />
                 <span asp-validation-for="Serviciu.Cost" class="text-danger"></span>
             </div>
-            @*
+            
             <div class="form-group">
                 <label asp-for="Serviciu.Data_Programare" class="control-label"></label>
                 <input asp-for="Serviciu.Data_Programare" class="form-control" />
                 <span asp-validation-for="Serviciu.Data_Programare" class="text-danger"></span>
             </div>
-            *@
+            
+
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                 int cnt = 0;
+                                 foreach (var cat in Model.StilAtribuitServiciuList) //EXCEPTIE
+                                 {
+                                     if (cnt++ % 3 == 0)
+                                     {
+                                         @:</tr><tr>
+                                     }
+                                     @:<td>
+                                         <input type="radio"
+                                             name="selectedStiluri"
+                                             value="@cat.StilID"
+                                             @(Html.Raw(cat.Atribuire ?
+                                                 "checked=\"checked\"" : "")) />
+                                         @cat.StilID @: @cat.Denumire
+                                     @:</td>
+                                 }
+                             @:</tr>
+                             }
+                    </table>
+                </div>
+             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

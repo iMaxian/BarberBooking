@@ -1,0 +1,60 @@
+﻿@page
+@model BarberBooking.Pages.Servicii.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Serviciu[0].Tip_Serviciu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Serviciu[0].Cost)
+            </th>
+            @*
+            <th> //Daca doresc sa afisez pe pagina principala data programarii, decomentez
+                @Html.DisplayNameFor(model => model.Serviciu[0].Data_Programare)
+            </th>
+            *@
+
+            <th>
+                @Html.DisplayNameFor(model => model.Serviciu[0].Barber.NumeComplet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Serviciu) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tip_Serviciu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            @* //Daca doresc sa afisez pe pagina principala data programarii, decomentez
+            <td>
+               @Html.DisplayFor(modelItem => item.Data_Programare)
+            </td>
+            *@
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Barber.NumeComplet)
+                </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
